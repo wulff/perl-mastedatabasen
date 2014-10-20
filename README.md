@@ -8,7 +8,7 @@ Denne animation viser udrulningen af mobilmaster i Danmark i perioden 1991-2014.
 Få fat i data
 -------------
 
-Data om danske antennemaster finder man i [Erhvervsstyrelsens Mastedatabase](http://mastedatabasen.dk/). Databasen indeholder data om flere forskellige [tjenestearter](http://mastedatabasen.dk/Master/antenner/tjenester.xml), men jeg er kun interesserede i mobiltelefoni, så jeg kører følgende kommando for at hente informationer om alle mobilmaster:
+Data om danske antennemaster finder man i [Erhvervsstyrelsens Mastedatabase](http://mastedatabasen.dk/). Databasen indeholder data om flere forskellige [tjenestearter](http://mastedatabasen.dk/Master/antenner/tjenester.xml), men jeg er kun interesseret i mobiltelefoni, så jeg kører følgende kommando for at hente informationer om alle mobilmaster:
 
     curl "http://mastedatabasen.dk/Master/antenner.json?tjeneste=2&maxantal=50000" > master.json
 
@@ -25,7 +25,7 @@ Databasen indholder en del misvisende poster – der er f.eks. en del registrer
 
 (Databasen indeholder information om [flere teknologier](http://mastedatabasen.dk/Master/antenner/teknologier.json), men jeg holder mig til de mobil-relaterede i denne omgang.)
 
-Scriptet `master.pl` læser de downloadede data fra Mastedatabasen og laver fire sepearate GeoJSON-filer: Én for hver af de tre teknologier og én med alle teknologierne samlet.
+Scriptet `master.pl` læser de downloadede data fra Mastedatabasen og laver fire separate GeoJSON-filer: Én for hver af de tre teknologier og én med alle teknologierne samlet.
 
 Rendér data i QGIS
 ------------------
@@ -36,13 +36,13 @@ Jeg opretter et nyt projekt og tilføjer Europas kystlinje som baggrundslag, der
 
 ![QGIS screenshot](https://raw.githubusercontent.com/wulff/perl-mastedatabasen/master/img/qgis.png)
 
-Derefter importeres hver GeoJSON-filerne til projektet, og hvert nyt lag duplikeres. Det er nødvendigt for at kunne lave en tydelig markering af de positioner, som tilføjes i et givet tidsrum. Jeg vælger at nye positioner skal vises med en stor, klar rød prik, mens eksisterende positioner vises med en mindre, mere dæmpet rød prik.
+Derefter importeres hver af GeoJSON-filerne til projektet, og hvert nyt lag duplikeres. Det er nødvendigt for at kunne lave en tydelig markering af de positioner, som tilføjes i et givet tidsrum. Jeg vælger at nye positioner skal vises med en stor, klar rød prik, mens eksisterende positioner vises med en mindre, mere dæmpet rød prik.
 
 Derefter bruger jeg Anita Grasers [TimeManager plugin](https://plugins.qgis.org/plugins/timemanager/) til at lave en animation på basis af de timestamps som findes i Mastedatabasen. Det nemmeste er at følge Anitas glimrende [vejledning](http://anitagraser.com/2011/11/20/nice-animations-with-time-managers-offset-feature/).
 
 ![QGIS Time Manager screenshot](https://raw.githubusercontent.com/wulff/perl-mastedatabasen/master/img/qgis-tm.png)
 
-Når start- og sluttidspunkt samt animationsintervallet (1 måned pr. frame i dette tilfælde) ser fornuftigt ud trykker jeg på *Export Video* for at eksportere alle animationens frames som PNG-filer. Det er ikke helt oplagt hvordan man kan styre opløsningen på de eksporterede filer, så i første omgang justerede jeg QGIS' viewport manuelt til 1280×720 pixels.
+Når start- og sluttidspunkt samt animationsintervallet (1 måned pr. frame i dette tilfælde) ser fornuftigt ud trykker jeg på *Export Video* for at eksportere alle animationens frames som PNG-filer. Det er ikke helt oplagt hvordan man styrer opløsningen på de eksporterede filer, så i første omgang justerede jeg QGIS' viewport manuelt til 1280×720 pixels.
 
 Jeg eksporterer fire samlinger af frames: Én for hver af de tre teknologier og én med alle teknologierne samlet.
 
