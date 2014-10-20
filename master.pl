@@ -41,7 +41,7 @@ foreach my $tech (keys %$technology) {
 
   # initialize geojson data structure
   my $result = {
-    type => 'FeatureCollection',
+    type     => 'FeatureCollection',
     features => [],
   };
 
@@ -73,15 +73,15 @@ foreach my $tech (keys %$technology) {
         coordinates => [$lon, $lat]
       },
       properties => {
-        id => $mast->{unik_station_navn},
-        date => $date . '-01 00:00:00', # aggregate masts per month
-        end => '2015-01-01 00:00:00', # necessary for qgis rendering
-        muni => $mast->{kommune}->{kode},
-        type => $mast->{tjenesteart}->{navn},
+        id      => $mast->{unik_station_navn},
+        date    => $date . '-01 00:00:00', # aggregate masts per month
+        end     => '2015-01-01 00:00:00', # necessary for qgis rendering
+        muni    => $mast->{kommune}->{kode},
+        type    => $mast->{tjenesteart}->{navn},
         type_id => $mast->{tjenesteart}->{id},
-        tech => $mast->{teknologi}->{navn},
+        tech    => $mast->{teknologi}->{navn},
         tech_id => $mast->{teknologi}->{id},
-        freq => $mast->{frekvensbaand},
+        freq    => $mast->{frekvensbaand},
       }
     };
   }
